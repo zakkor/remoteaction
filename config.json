@@ -1,13 +1,21 @@
 {
   "menus": [
     {
-      "contexts": ["page", "link"],
+      "contexts": ["link", "selection"],
       "action": "ytdl-audio",
       "name": "Download YouTube link",
-      "patterns": ["*://www.youtube.com/watch*", "*://youtu.be/*"]
+      "patterns": ["*://www.youtube.com/watch*", "*://youtu.be/*"],
+      "regexes": []
+    },
+    {
+      "contexts": ["selection"],
+      "action": "dl-torrent",
+      "name": "Download torrent hash",
+      "regexes": ["[0-9A-F]{40}"]
     }
   ],
   "commands": {
-    "ytdl-audio": "echo {{.}}"
+    "ytdl-audio": "echo youtube_{{.}}",
+    "dl-torrent": "echo torrent_{{.}}"
   }
 }

@@ -25,6 +25,7 @@ type Menu struct {
 	Action   string   `json:"action"`
 	Name     string   `json:"name"`
 	Patterns []string `json:"patterns"`
+	Regexes  []string `json:"regexes"`
 }
 
 func main() {
@@ -57,8 +58,8 @@ func main() {
 		// TODO: better error handling in here
 
 		action := r.URL.Query().Get("action")
-		link := r.URL.Query().Get("link")
-		link, err := url.QueryUnescape(link)
+		data := r.URL.Query().Get("data")
+		data, err := url.QueryUnescape(data)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
@@ -73,7 +74,7 @@ func main() {
 		// Parse and execute template
 		t := template.Must(template.New(action).Parse(cmdTempl))
 		var buf bytes.Buffer
-		err = t.Execute(&buf, link)
+		err = t.Execute(&buf, data)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
