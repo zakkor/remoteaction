@@ -1,0 +1,13 @@
+{
+  "menus": [
+    {
+      "contexts": ["page", "link"],
+      "action": "ytdl-audio",
+      "name": "Download YouTube link",
+      "patterns": ["*://www.youtube.com/watch*", "*://youtu.be/*"]
+    }
+  ],
+  "commands": {
+    "ytdl-audio": "echo {{.}}"
+  }
+}
