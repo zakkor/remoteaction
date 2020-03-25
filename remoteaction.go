@@ -19,6 +19,13 @@ import (
 	"github.com/go-chi/chi/middleware"
 )
 
+var (
+	configPath = flag.String("c", "./config.json", "path to config file")
+	user       = flag.String("user", "", "username to use for authentication")
+	pass       = flag.String("pass", "", "password to use for authentication")
+	port       = flag.String("port", "6969", "port to listen on")
+)
+
 type Server struct {
 	Config Config
 }
@@ -37,11 +44,6 @@ type Menu struct {
 }
 
 func main() {
-	var (
-		configPath = flag.String("c", "./config.json", "path to config file")
-		user       = flag.String("user", "", "username to use for authentication")
-		pass       = flag.String("pass", "", "password to use for authentication")
-	)
 	flag.Parse()
 
 	// Read config file data and unmarshal into struct
@@ -79,7 +81,7 @@ func main() {
 	// Execute a command when an action happens.
 	r.Post("/action", s.ActionHandler)
 
-	err = http.ListenAndServe(":6969", r)
+	err = http.ListenAndServe(":"+*port, r)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -117,7 +119,7 @@ func (s *Server) ActionHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(500), 500)
 		return
 	}
-	
+
 	log.Println(string(out))
 	w.Write(out)
 }
