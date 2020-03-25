@@ -1,29 +1,45 @@
 {
-  "menus": [
-    {
-      "contexts": ["link", "selection"],
-      "action": "dl-ytaudio",
-      "name": "Download YouTube link",
-      "patterns": ["*://www.youtube.com/watch*", "*://youtu.be/*"],
-      "regexes": []
-    },
-    {
-      "contexts": ["selection"],
-      "action": "dl-torrent",
-      "name": "Download torrent hash",
-      "regexes": ["[0-9A-F]{40}"]
-    },
-    {
-    	"contexts": ["request"],
-    	"action": "dl-stream",
-    	"name":	"Download Nebula stream",
-		"patterns": ["*://watchnebula.com/videos/*"],
-    	"regexes": ["https:\\\/\\\/player.zype.com\\\/manifest\\\/.+\\.m3u8"]
-    }
-  ],
-  "commands": {
-    "dl-ytaudio": "echo youtube {{.}}",
-    "dl-torrent": "echo torrent {{.}}",
-    "dl-stream": "echo stream {{.}}"
-  }
+	"menus": [
+		{
+			"contexts": [
+				"link",
+				"selection"
+			],
+			"action": "dl-ytaudio",
+			"name": "Download YouTube link",
+			"patterns": [
+				"*://www.youtube.com/watch*",
+				"*://youtu.be/*"
+			],
+			"regexes": []
+		},
+		{
+			"contexts": [
+				"selection"
+			],
+			"action": "dl-torrent",
+			"name": "Download torrent hash",
+			"regexes": [
+				"[0-9A-F]{40}"
+			]
+		},
+		{
+			"contexts": [
+				"request"
+			],
+			"action": "dl-stream",
+			"name": "Download Nebula stream",
+			"patterns": [
+				"*://watchnebula.com/videos/*"
+			],
+			"regexes": [
+				"https:\\\/\\\/player.zype.com\\\/manifest\\\/.+\\.m3u8"
+			]
+		}
+	],
+	"commands": {
+		"dl-ytaudio": "echo youtube {{.}}",
+		"dl-torrent": "echo torrent {{.}}",
+		"dl-stream": "echo stream {{.}}"
+	}
 }
