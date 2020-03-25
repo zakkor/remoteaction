@@ -114,9 +114,9 @@ func (s *Server) ActionHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cmd := buf.String()
-	out, err := exec.Command("sh", "-c", cmd).Output()
+	out, err := exec.Command("sh", "-c", cmd).CombinedOutput()
 	if err != nil {
-		log.Println(err)
+		log.Println(string(out))
 		http.Error(w, http.StatusText(500), 500)
 		return
 	}
