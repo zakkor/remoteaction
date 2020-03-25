@@ -18,7 +18,7 @@
     	"action": "dl-stream",
     	"name":	"Download Nebula stream",
 		"patterns": ["*://watchnebula.com/videos/*"],
-    	"regexes": ["https://player.zype.com/manifest/5ce609ee2965b425662922ff.m3u8"]
+    	"regexes": ["https:\\\/\\\/player.zype.com\\\/manifest\\\/.+\\.m3u8"]
     }
   ],
   "commands": {
