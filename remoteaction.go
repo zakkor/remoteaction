@@ -23,7 +23,7 @@ var (
 	configPath = flag.String("c", "./config.json", "path to config file")
 	user       = flag.String("user", "", "username to use for authentication")
 	pass       = flag.String("pass", "", "password to use for authentication")
-	port       = flag.String("port", "6969", "port to listen on")
+	listen     = flag.String("listen", ":6969", "address to listen on")
 )
 
 type Server struct {
@@ -81,7 +81,7 @@ func main() {
 	// Execute a command when an action happens.
 	r.Post("/action", s.ActionHandler)
 
-	err = http.ListenAndServe(":"+*port, r)
+	err = http.ListenAndServe(*listen, r)
 	if err != nil {
 		log.Fatalln(err)
 	}

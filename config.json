@@ -1,43 +1,35 @@
 {
 	"menus": [
 		{
-			"contexts": [
-				"link",
-				"selection"
-			],
+			"contexts": ["link", "selection"],
 			"action": "dl-ytaudio",
 			"name": "Download YouTube link",
-			"patterns": [
-				"*://www.youtube.com/watch*",
-				"*://youtu.be/*"
-			],
+			"patterns": ["*://www.youtube.com/watch*", "*://youtu.be/*"],
 			"regexes": []
 		},
 		{
-			"contexts": [
-				"selection"
-			],
+			"contexts": ["selection"],
 			"action": "dl-torrent",
 			"name": "Download torrent hash",
-			"regexes": [
-				"[0-9A-F]{40}"
-			]
+			"regexes": ["[0-9A-F]{40}"]
 		},
 		{
-			"contexts": [
-				"request"
-			],
+			"contexts": ["request"],
 			"action": "dl-stream",
 			"name": "Download Nebula stream",
-			"patterns": [
-				"*://watchnebula.com/videos/*"
-			],
-			"regexes": [
-				"https:\\\/\\\/player.zype.com\\\/manifest\\\/.+\\.m3u8"
-			]
+			"patterns": ["*://watchnebula.com/videos/*"],
+			"regexes": ["https:\\\/\\\/player.zype.com\\\/manifest\\\/.+\\.m3u8"]
+		},
+		{
+			"contexts": ["link"],
+			"action": "clone-repo",
+			"name": "Clone repository",
+			"patterns": ["*://github.com/*/*", "*://gitlab.com/*/*"],
+			"regexes": []
 		}
 	],
 	"commands": {
+		"clone-repo": "echo git clone {{.}}",
 		"dl-ytaudio": "echo youtube {{.}}",
 		"dl-torrent": "echo torrent {{.}}",
 		"dl-stream": "echo stream {{.}}"
