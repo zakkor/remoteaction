@@ -2,7 +2,7 @@
   "menus": [
     {
       "contexts": ["link", "selection"],
-      "action": "ytdl-audio",
+      "action": "dl-ytaudio",
       "name": "Download YouTube link",
       "patterns": ["*://www.youtube.com/watch*", "*://youtu.be/*"],
       "regexes": []
@@ -12,10 +12,18 @@
       "action": "dl-torrent",
       "name": "Download torrent hash",
       "regexes": ["[0-9A-F]{40}"]
+    },
+    {
+    	"contexts": ["request"],
+    	"action": "dl-stream",
+    	"name":	"Download Nebula stream",
+		"patterns": ["*://watchnebula.com/videos/*"],
+    	"regexes": ["https://player.zype.com/manifest/5ce609ee2965b425662922ff.m3u8"]
     }
   ],
   "commands": {
-    "ytdl-audio": "echo youtube_{{.}}",
-    "dl-torrent": "echo torrent_{{.}}"
+    "dl-ytaudio": "echo youtube {{.}}",
+    "dl-torrent": "echo torrent {{.}}",
+    "dl-stream": "echo stream {{.}}"
   }
 }

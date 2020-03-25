@@ -111,14 +111,14 @@ func (s *Server) ActionHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cmd := buf.String()
-	log.Println(cmd)
 	out, err := exec.Command("sh", "-c", cmd).Output()
 	if err != nil {
 		log.Println(err)
 		http.Error(w, http.StatusText(500), 500)
 		return
 	}
-
+	
+	log.Println(string(out))
 	w.Write(out)
 }
 
