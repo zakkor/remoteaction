@@ -14,6 +14,7 @@ import (
 	"text/template"
 	"time"
 
+	"github.com/alessio/shellescape"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 )
@@ -92,6 +93,7 @@ func (s *Server) ActionHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(500), 500)
 		return
 	}
+	data = shellescape.Quote(data)
 
 	cmdTempl, ok := s.Config.Commands[action]
 	if !ok {
@@ -108,16 +110,11 @@ func (s *Server) ActionHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Split template output into [cmd, args...]
-	parts := strings.Split(buf.String(), " ")
-	cmd := parts[0]
-	var args []string
-	if len(parts) > 1 {
-		args = parts[1:]
-	}
-
-	out, err := exec.Command(cmd, args...).Output()
+	cmd := buf.String()
+	log.Println(cmd)
+	out, err := exec.Command("sh", "-c", cmd).Output()
 	if err != nil {
+		log.Println(err)
 		http.Error(w, http.StatusText(500), 500)
 		return
 	}
