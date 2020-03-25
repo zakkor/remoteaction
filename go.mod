@@ -1,4 +1,4 @@
-module github.com/zakkor/sendaction
+module github.com/zakkor/remoteaction
 
 go 1.13
 
