@@ -2,10 +2,17 @@
 	"menus": [
 		{
 			"contexts": ["link", "selection"],
-			"action": "dl-ytaudio",
+			"action": "youtube-dl",
 			"name": "Download YouTube link",
 			"patterns": ["*://www.youtube.com/watch*", "*://youtu.be/*"],
 			"regexes": []
+		},
+		{
+			"contexts": ["request"],
+			"action": "youtube-dl",
+			"name": "Download SoundCloud link",
+			"patterns": ["*://soundcloud.com/*/*"],
+			"regexes": ["https:\\\/\\\/cf-hls-media.sndcdn.com\\\/playlist\\\/.+\\.mp3\\\/playlist\\.m3u8"]
 		},
 		{
 			"contexts": ["selection"],
@@ -30,7 +37,7 @@
 	],
 	"commands": {
 		"clone-repo": "echo git clone {{.}}",
-		"dl-ytaudio": "echo youtube {{.}}",
+		"youtube-dl": "r youtube-dl {{.}}",
 		"dl-torrent": "echo torrent {{.}}",
 		"dl-stream": "echo stream {{.}}"
 	}
