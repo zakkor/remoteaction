@@ -68,6 +68,7 @@ func main() {
 
 	// Middlewares
 	r.Use(middleware.Timeout(2 * time.Second))
+	r.Use(middleware.Logger)
 
 	if *pass != "" {
 		r.Use(AuthOnly(*user, *pass))
